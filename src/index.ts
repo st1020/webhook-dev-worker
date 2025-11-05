@@ -1,5 +1,8 @@
 export default {
   async fetch(request, env, ctx): Promise<Response> {
+    if (request.method !== "POST") {
+      return new Response("Not Found", { status: 404 })
+    }
     const logEntry = {
       method: request.method,
       url: request.url,

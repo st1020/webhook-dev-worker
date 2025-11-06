@@ -10,7 +10,8 @@ export default {
       body: await request.text(),
       timestamp: new Date().toISOString(),
     }
-    const key = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`
+    const url = new URL(request.url)
+    const key = `${url.pathname}-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`
     await env.WEBHOOK_LOG.put(key, JSON.stringify(logEntry))
     return new Response("OK")
   },
